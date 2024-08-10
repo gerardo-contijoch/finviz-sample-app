@@ -8,6 +8,7 @@
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  width: 15em;
 }
 .card:hover {
   border-color: #646cff;
