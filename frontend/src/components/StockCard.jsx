@@ -49,7 +49,10 @@ function formatNumber(number) {
 export function StockCard({data}) {
   //console.log(data);
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onClick={() => window.open(`https://finviz.com/quote.ashx?t=${data.symbol}`)}
+    >
       <span className={styles.symbol}>{data.symbol}</span>
       <ul>
         <li>
