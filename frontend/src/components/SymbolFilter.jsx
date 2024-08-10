@@ -14,9 +14,9 @@ export function SymbolFilter({onChange}) {
       <span>Filtrar por simbolo:</span>
       <input
         type='text'
-        onChange={(e) => setSymbol(e.target.value)}
+        onChange={(e) => setSymbol(e.target.value.toLocaleUpperCase())}
         value={symbol}
-        onKeyDown={(e) => e.key === 'Enter' && onChange(symbol)}
+        onKeyDown={(e) => e.key === 'Enter' && onChange(symbol.toLocaleUpperCase())}
       />
     </div>
   );

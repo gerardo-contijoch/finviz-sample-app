@@ -47,13 +47,14 @@ function formatNumber(number) {
  * @returns
  */
 export function StockCard({data}) {
+  console.log(data);
   return (
     <div className={styles.card}>
       <span className={styles.symbol}>{data.symbol}</span>
       <ul>
         <li>
           <span className={styles.cardLabel}>Price:</span>
-          <span className={styles.cardValue}>{formatPrice(data.price.toFixed(2))}</span>
+          <span className={styles.cardValue}>{formatPrice(data.price)}</span>
         </li>
         <li>
           <span className={styles.cardLabel}>Market cap:</span>
