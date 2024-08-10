@@ -33,7 +33,7 @@ npm install
 
 para bajar todas las dependencias de los proyectos.
 
-Para ejecutar la app lo primero que hay que hacer es crear el archivo `.env`, copiandolo de `.env.sample` y personalizarlo con la cadena de conexión a MongoDB y el api key de FinViz. Si no poseemos cuenta en FinViz, es posible ejecutar la app precargando la DB con datos fake.
+Para ejecutar la app lo primero que hay que hacer es crear el archivo `backend\.env`, copiandolo de `backend\.env.sample` y personalizarlo con la cadena de conexión a MongoDB y el api key de FinViz. Si no poseemos cuenta en FinViz, es posible ejecutar la app precargando la DB con datos fake.
 
 ### Si tenemos MongoDB instalado localmente
 
@@ -45,11 +45,11 @@ npm run db
 
 > El script `backend\run_mongodb.ps1` contiene el path por defecto a MongoDB para la version 7. De encontrarse instalado el mismo en otro path, es necesario personalizar este script con el path correcto.
 >
-> Si MongoDB no se encuentra escuchando en el puerto por defecto, es necesario configurar el valor de `MONGO_DB_CNN_STRING` en `.env`.
+> Si MongoDB no se encuentra escuchando en el puerto por defecto, es necesario configurar el valor de `MONGO_DB_CNN_STRING` en `backend\.env`.
 
 ### Si no tenemos MongoDB instalado localmente
 
-Si MongoDB no se encuentra instalado localmente entonces solo hay que personalizar la cadena de conexion (`MONGO_DB_CNN_STRING`) al valor que corresponda en `.env`.
+Si MongoDB no se encuentra instalado localmente entonces solo hay que personalizar la cadena de conexion (`MONGO_DB_CNN_STRING`) al valor que corresponda en `backend\.env`.
 
 ### Backend
 
