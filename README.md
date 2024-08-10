@@ -13,7 +13,7 @@ Consiste en un SPA y un api backend.
 
 ## Instrucciones
 
-Para ejecutar la app lo primero que hay que hacer es crear el archivo `.env`, copiandolo de `.env.local` y personalizarlo con la cadena de conexión a MongoDB y el api key de FinViz. Si no poseemos cuenta en FinViz, es posible ejecutar la app precargando la DB con datos fake.
+Para ejecutar la app lo primero que hay que hacer es crear el archivo `.env`, copiandolo de `.env.sample` y personalizarlo con la cadena de conexión a MongoDB y el api key de FinViz. Si no poseemos cuenta en FinViz, es posible ejecutar la app precargando la DB con datos fake.
 
 ### Si tenemos MongoDB instalado localmente
 
