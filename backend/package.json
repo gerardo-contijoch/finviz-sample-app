@@ -1,0 +1,25 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "dev": "node --env-file=../.env --watch app/server.js",
+        "start": "node --env-file=../.env app/server.js",
+        "db": "run_mongodb.ps1",
+        "test": "test"
+    },
+    "author": "Gerardo Contijoch",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "csv-parse": "^5.5.6",
+        "express": "^4.19.2",
+        "mongodb": "^6.8.0",
+        "stream-transform": "^3.3.2"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "prettier": "3.3.3"
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "finvizsampleapp",
+  "version": "1.0.0",
+  "description": "App de ejemplo que muestra información de acciones",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "backend-dev": "npm run dev --workspace=backend",
+    "backend": "npm run start --workspace=backend",
+    "db": "npm run db --workspace=backend",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gerardo Contijoch"
+}
