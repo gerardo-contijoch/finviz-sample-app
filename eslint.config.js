@@ -3,6 +3,7 @@ import globals from 'globals';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import jsdoc from 'eslint-plugin-jsdoc';
 
 export default [
   {
@@ -10,7 +11,7 @@ export default [
     ignores: ['dist'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {...globals.browser, ...globals.node},
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: {jsx: true},
@@ -22,6 +23,7 @@ export default [
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      jsdoc,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -30,6 +32,7 @@ export default [
       ...reactHooks.configs.recommended.rules,
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': ['warn', {allowConstantExport: true}],
+      'jsdoc/no-undefined-types': 1,
     },
   },
 ];

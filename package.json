@@ -2,6 +2,7 @@
   "name": "finvizsampleapp",
   "version": "1.0.0",
   "description": "App de ejemplo que muestra información de acciones",
+  "type": "module",
   "workspaces": [
     "backend",
     "frontend"
@@ -11,7 +12,17 @@
     "backend": "npm run start --workspace=backend",
     "frontend": "npm run dev --workspace=frontend",
     "db": "npm run db --workspace=backend",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
   },
-  "author": "Gerardo Contijoch"
+  "author": "Gerardo Contijoch",
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "eslint": "^9.8.0",
+    "@types/react": "^18.3.3",
+    "eslint-plugin-jsdoc": "^50.0.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9"
+  }
 }
