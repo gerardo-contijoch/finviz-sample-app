@@ -93,7 +93,7 @@ export async function getStocksFundamentals(symbolFilter) {
         const fundamentals = database.collection('fundamentals');
 
         // Esta busqueda por regex no es optima, no usa indices
-        const cursor = fundamentals.find({ symbol: { $regex: symbolFilter } });
+        const cursor = fundamentals.find({ symbol: { $regex: `^${symbolFilter}` } });
 
         let data = [];
         for await (const doc of cursor) {
