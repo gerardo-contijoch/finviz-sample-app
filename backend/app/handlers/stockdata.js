@@ -117,9 +117,9 @@ async function parseLines(lines) {
             marketCap: parseFloat(record[2]) * 1000000,
             priceEarnings: parseFloat(record[3]),
             sharesOutsanding: parseFloat(record[4]) * 1000000,
-            ROA: parseInt(record[5]) * 100,
-            ROE: parseInt(record[6]) * 100,
-            ROI: parseInt(record[7]) * 100,
+            ROA: parseFloat(record[5]) * 100,
+            ROE: parseFloat(record[6]) * 100,
+            ROI: parseFloat(record[7]) * 100,
             price: parseFloat(record[8]),
         });
     });
