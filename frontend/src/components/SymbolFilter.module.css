@@ -1,0 +1,10 @@
+input {
+  text-transform: uppercase;
+}
+
+.filterContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1em;
+}

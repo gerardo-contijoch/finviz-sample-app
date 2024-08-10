@@ -1,27 +1,120 @@
 import {useState} from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
+import {SymbolFilter} from './components/SymbolFilter';
+import {StockCard} from './components/StockCard';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [symbol, setSymbol] = useState('');
+
+  const fakeData = [
+    {
+      symbol: 'AAPL',
+      price: 120.55,
+      marketCap: 10000,
+      sharesOut: 10000,
+      priceEarn: 10000,
+      roa: 1100,
+      roi: -2050,
+      roe: -1410,
+    },
+    {
+      symbol: 'A',
+      marketCap: 39941940000,
+      priceEarnings: 32.35,
+      sharesOutsanding: 292120000,
+      roa: 1100,
+      roi: -2050,
+      roe: -1410,
+      price: 136.9,
+    },
+    {
+      symbol: 'AACI',
+      marketCap: 81210000,
+      priceEarnings: null,
+      sharesOutsanding: 8070000,
+      roa: 1100,
+      roi: -2050,
+      roe: -1410,
+      price: 11.39,
+    },
+    {
+      symbol: 'AAPL',
+      price: 120.55,
+      marketCap: 10000,
+      sharesOut: 10000,
+      priceEarn: 10000,
+      roa: 1100,
+      roi: -2050,
+      roe: -1410,
+    },
+    {
+      symbol: 'A',
+      marketCap: 39941940000,
+      priceEarnings: 32.35,
+      sharesOutsanding: 292120000,
+      roa: 1100,
+      roi: -2050,
+      roe: -1410,
+      price: 136.9,
+    },
+    {
+      symbol: 'AACI',
+      marketCap: 81210000,
+      priceEarnings: null,
+      sharesOutsanding: 8070000,
+      roa: 1100,
+      roi: -2050,
+      roe: -1410,
+      price: 11.39,
+    },
+    {
+      symbol: 'AAPL',
+      price: 120.55,
+      marketCap: 10000,
+      sharesOut: 10000,
+      priceEarn: 10000,
+      roa: 1100,
+      roi: -2050,
+      roe: -1410,
+    },
+    {
+      symbol: 'A',
+      marketCap: 39941940000,
+      priceEarnings: 32.35,
+      sharesOutsanding: 292120000,
+      roa: 1100,
+      roi: -2050,
+      roe: -1410,
+      price: 136.9,
+    },
+    {
+      symbol: 'IBM',
+      marketCap: 176354160000,
+      priceEarnings: 21.1,
+      sharesOutsanding: 921150000,
+      roa: 1100,
+      roi: -2050,
+      roe: -1410,
+      price: 191.45,
+    },
+  ];
 
   return (
     <>
-      <div>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <h1>Stock Data Sample App</h1>
+      <SymbolFilter onChange={setSymbol} />
+      <div
+        style={{
+          marginTop: '2em',
+          display: 'flex',
+          flexFlow: 'row wrap',
+          gap: '10px',
+          justifyContent: 'center',
+        }}
+      >
+        {fakeData.map((d) => (
+          <StockCard data={d} />
+        ))}
       </div>
       <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
     </>
