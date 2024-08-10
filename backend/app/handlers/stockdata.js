@@ -7,7 +7,7 @@ import {
     clearStocksFundamentals,
     getAllStocksFundamentals,
 } from '../db/db.js';
-
+import fs from 'fs';
 import e from 'express';
 
 /**
@@ -66,25 +66,33 @@ async function initializeDBHandler(req, res) {
     const API_KEY = process.env.FINVIZ_API_KEY;
     const FINVIZ_URL = 'https://elite.finviz.com/export.ashx';
 
+    let fundamentals = [];
+
     let count = 0;
+    if (req.query.use_finviz) {
+        // Usar esta url para testing
+        //`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&f=ta_change_u20&auth=${API_KEY}`
 
-    // Usar esta url para testing
-    //`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&f=ta_change_u20&auth=${API_KEY}`
+        await fetch(`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&auth=${API_KEY}`).then(async (r) => {
+            const lines = await r.text();
 
-    await fetch(`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&auth=${API_KEY}`).then(async (r) => {
-        const lines = await r.text();
+            fundamentals = await parseLines(lines);
+        });
+    } else {
+        fs.readFile('fake-data.json', (err, data) => {
+            if (err) console.log('Error al leer el archivo:', err);
+            fundamentals = JSON.parse(data.toString());
+        });
+    }
 
-        const fundamentals = await parseLines(lines);
+    // Si tenemos datos parseados, borramos todo lo que hay en la tabla de fundamentals
+    if (fundamentals && fundamentals.length > 0) {
+        await clearStocksFundamentals();
+    }
 
-        // Si tenemos datos parseados, borramos todo lo que hay en la tabla de fundamentals
-        if (fundamentals && fundamentals.length > 0) {
-            await clearStocksFundamentals();
-        }
-
-        var inserted = await addStocksFundamentals(fundamentals);
-        if (!inserted) count = 0;
-        else count = inserted;
-    });
+    var inserted = await addStocksFundamentals(fundamentals);
+    if (!inserted) count = 0;
+    else count = inserted;
 
     if (count > 0) return res.status(200).json({ message: `Se inicializó la DB con ${count} registros` });
     else return res.status(500).json({ message: 'No fue posible inicializar la DB.' });

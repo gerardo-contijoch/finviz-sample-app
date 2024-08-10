@@ -45,6 +45,14 @@ para ejecutar el backend. Navegando a [http://localhost:8090](http://localhost:8
 {"message": "OK"}
 ```
 
+#### Inicializacion de la DB
+
+Con el backend corriendo lo primero que debemos hacer es inicializar la DB con datos. Estos datos pueden venir desde [Finviz](https://finviz.com/) (datos reales en realtime) o cargarse datos de prueba.
+
+> WARNING: Lo siguiente es un hack temporal. NUNCA actualizar datos desde un `GET`.
+
+Para inicializar la DB acceder a [http://localhost:8090/data/initialize](http://localhost:8090/data/initialize). Si tenemos el api key de FinViz configurado simplemente agregar `?use_finviz=1` a la url y la DB se inicializará con datos reales.
+
 ### Frontend
 
 Para levantar el frontend ejecutar:

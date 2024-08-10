@@ -3,12 +3,11 @@
     "version": "1.0.0",
     "description": "",
     "type": "module",
-    "main": "index.js",
     "scripts": {
         "dev": "node --env-file=../.env --watch app/server.js",
         "start": "node --env-file=../.env app/server.js",
         "db": "run_mongodb.ps1",
-        "test": "test"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Gerardo Contijoch",
     "dependencies": {
