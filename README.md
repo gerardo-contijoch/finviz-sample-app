@@ -60,3 +60,5 @@ Para levantar el frontend ejecutar:
 ```sh
 npm run frontend
 ```
+
+Por defecto el frontend se levantara en [http://localhost:5173](http://localhost:5173).
