@@ -10,8 +10,8 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const host = import.meta.env.VITE_API_HOST;
-      const port = import.meta.env.VITE_API_PORT;
+      const host = import.meta.env.VITE_API_HOST || 'localhost';
+      const port = import.meta.env.VITE_API_PORT || 8090;
       let url = `http://${host}:${port}/api/data`;
 
       if (symbol && symbol.length > 0) url += `?symbol=${symbol}`;
