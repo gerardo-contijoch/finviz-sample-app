@@ -76,6 +76,35 @@ export async function getAllStocksFundamentals() {
     }
 }
 
+/**
+ *
+ * @param {string} symbolFilter
+ * @returns
+ */
+export async function getStocksFundamentals(symbolFilter) {
+    symbolFilter = sanitizeSymbol(symbolFilter);
+
+    if (symbolFilter === '') return await getAllStocksFundamentals();
+
+    await client.connect();
+
+    try {
+        const database = client.db('stockData');
+        const fundamentals = database.collection('fundamentals');
+
+        // Esta busqueda por regex no es optima, no usa indices
+        const cursor = fundamentals.find({ symbol: { $regex: symbolFilter } });
+
+        let data = [];
+        for await (const doc of cursor) {
+            data.push(doc);
+        }
+        return data;
+    } finally {
+        await client.close();
+    }
+}
+
 export async function clearStocksFundamentals() {
     await client.connect();
 
@@ -87,4 +116,13 @@ export async function clearStocksFundamentals() {
     } finally {
         await client.close();
     }
+}
+
+/**
+ * Poor man sanitize
+ * @param {string} symbol
+ * @returns
+ */
+function sanitizeSymbol(symbol) {
+    return symbol.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
 }

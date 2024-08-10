@@ -5,7 +5,7 @@ import {
     addStockFundamentals,
     addStocksFundamentals,
     clearStocksFundamentals,
-    getAllStocksFundamentals,
+    getStocksFundamentals,
 } from '../db/db.js';
 import fs from 'fs';
 import e from 'express';
@@ -15,7 +15,7 @@ import e from 'express';
  * @param {e.Express} app
  */
 export function mapEndpointHandlers(app) {
-    app.get('/api/data', getAllStocksDataHandler);
+    app.get('/api/data', getStocksDataHandler);
     app.get('/api/data/new', addStockDataHandler);
     app.get('/api/data/initialize', initializeDBHandler);
 }
@@ -26,8 +26,9 @@ export function mapEndpointHandlers(app) {
  * @param {e.Response} res
  * @returns
  */
-async function getAllStocksDataHandler(req, res) {
-    var data = await getAllStocksFundamentals();
+async function getStocksDataHandler(req, res) {
+    var symbolFilter = req.query.symbol ?? '';
+    var data = await getStocksFundamentals(symbolFilter.toString());
 
     return res.status(200).json(data);
 }
