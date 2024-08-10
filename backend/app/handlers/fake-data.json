@@ -1,16 +1,5 @@
 [
     {
-        "_id": "66b76790d1c4587830eae9aa",
-        "symbol": "Ticker",
-        "marketCap": null,
-        "priceEarnings": null,
-        "sharesOutsanding": null,
-        "ROA": null,
-        "ROE": null,
-        "ROI": null,
-        "price": null
-    },
-    {
         "_id": "66b76790d1c4587830eae9ab",
         "symbol": "A",
         "marketCap": 39941940000,

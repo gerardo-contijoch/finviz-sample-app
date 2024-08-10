@@ -68,15 +68,15 @@ async function initializeDBHandler(req, res) {
 
     let fundamentals = [];
 
-    let count = 0;
     if (req.query.use_finviz) {
         // Usar esta url para testing
         //`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&f=ta_change_u20&auth=${API_KEY}`
 
         await fetch(`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&auth=${API_KEY}`).then(async (r) => {
-            const lines = await r.text();
+            const lines = (await r.text()).split('\n');
 
-            fundamentals = await parseLines(lines);
+            // La primer linea es el header
+            fundamentals = await parseLines(lines.slice(1));
         });
     } else {
         fs.readFile('fake-data.json', (err, data) => {
@@ -85,14 +85,15 @@ async function initializeDBHandler(req, res) {
         });
     }
 
+    let count = 0;
     // Si tenemos datos parseados, borramos todo lo que hay en la tabla de fundamentals
     if (fundamentals && fundamentals.length > 0) {
         await clearStocksFundamentals();
-    }
 
-    var inserted = await addStocksFundamentals(fundamentals);
-    if (!inserted) count = 0;
-    else count = inserted;
+        var inserted = await addStocksFundamentals(fundamentals);
+        if (!inserted) count = 0;
+        else count = inserted;
+    }
 
     if (count > 0) return res.status(200).json({ message: `Se inicializó la DB con ${count} registros` });
     else return res.status(500).json({ message: 'No fue posible inicializar la DB.' });
@@ -100,7 +101,7 @@ async function initializeDBHandler(req, res) {
 
 /**
  *
- * @param {string} lines
+ * @param {string[]} lines
  * @returns
  */
 async function parseLines(lines) {
@@ -122,5 +123,5 @@ async function parseLines(lines) {
         });
     });
 
-    return await Readable.from([lines]).pipe(parser).pipe(transformer).toArray();
+    return await Readable.from(lines).pipe(parser).pipe(transformer).toArray();
 }
