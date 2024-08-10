@@ -2,11 +2,19 @@ import express from 'express';
 import cors from 'cors';
 import { mapEndpointHandlers as mapTestEndpoints } from './handlers/test.js';
 import { mapEndpointHandlers as mapDataEndpoints } from './handlers/stockdata.js';
+import morgan from 'morgan';
 
 var host = process.env.API_HOST || 'localhost';
 var port = parseInt(process.env.API_PORT) || 9090;
 
 var app = express();
+
+app.use(
+    morgan('tiny', {
+        immediate: true,
+    }),
+);
+
 app.use(cors());
 
 mapTestEndpoints(app);
