@@ -43,7 +43,7 @@ function formatNumber(number) {
 
 /**
  *
- * @param {{symbol:string, price:number, marketCap: number, sharesOutsanding:number, priceEarnings:number, ROA:number, ROI:number, ROE:number}} data
+ * @param {{symbol:string, price:number, marketCap: number, sharesOutsanding:number, priceEarnings:number, ROA:number, ROI:number, ROE:number, name:string}} data
  * @returns
  */
 export function StockCard({data}) {
@@ -54,6 +54,7 @@ export function StockCard({data}) {
       onClick={() => window.open(`https://finviz.com/quote.ashx?t=${data.symbol}`)}
     >
       <span className={styles.symbol}>{data.symbol}</span>
+      <span className={styles.name}>{data.name ?? '-'}</span>
       <ul>
         <li>
           <span className={styles.cardLabel}>Price:</span>

@@ -73,7 +73,7 @@ async function initializeDBHandler(req, res) {
         // Usar esta url para testing
         //`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&f=ta_change_u20&auth=${API_KEY}`
 
-        await fetch(`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&auth=${API_KEY}`).then(async (r) => {
+        await fetch(`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65,2&auth=${API_KEY}`).then(async (r) => {
             const lines = (await r.text()).split('\n');
 
             // La primer linea es el header
@@ -121,6 +121,7 @@ async function parseLines(lines) {
             ROE: parseFloat(record[6]) * 100,
             ROI: parseFloat(record[7]) * 100,
             price: parseFloat(record[8]),
+            name: record[9],
         });
     });
 
