@@ -69,7 +69,7 @@ async function initializeDBHandler(req, res) {
 
     let fundamentals = [];
 
-    if (req.query.use_finviz) {
+    if (validateFinVizKey(API_KEY)) {
         // Usar esta url para testing
         //`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&f=ta_change_u20&auth=${API_KEY}`
 
@@ -135,4 +135,13 @@ async function parseLines(lines) {
     });
 
     return await Readable.from(lines).pipe(parser).pipe(transformer).toArray();
+}
+
+/**
+ * Validacion pedorra del key de fin viz.
+ * @param {*} key
+ * @returns
+ */
+function validateFinVizKey(key) {
+    return key && key.length == 36 && key == key.replace(/[^a-zA-Z0-9-]/g, '');
 }
