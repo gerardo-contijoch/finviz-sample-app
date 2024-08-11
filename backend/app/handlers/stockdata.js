@@ -73,6 +73,8 @@ async function initializeDBHandler(req, res) {
         // Usar esta url para testing
         //`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&f=ta_change_u20&auth=${API_KEY}`
 
+        console.log('Inicializando db desde finviz...');
+
         await fetch(`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65,2&auth=${API_KEY}`).then(async (r) => {
             const lines = (await r.text()).split('\n');
 
@@ -80,10 +82,15 @@ async function initializeDBHandler(req, res) {
             fundamentals = await parseLines(lines.slice(1));
         });
     } else {
-        fs.readFile('fake-data.json', (err, data) => {
-            if (err) console.log('Error al leer el archivo:', err);
-            fundamentals = JSON.parse(data.toString());
-        });
+        console.log('Inicializando db con fake data...');
+        let data;
+        try {
+            data = fs.readFileSync('fake-data.json');
+        } catch (err) {
+            console.error('Error al leer el archivo fake-data.json:', err);
+        }
+
+        if (data) fundamentals = JSON.parse(data.toString());
     }
 
     let count = 0;
@@ -92,8 +99,10 @@ async function initializeDBHandler(req, res) {
         await clearStocksFundamentals();
 
         var inserted = await addStocksFundamentals(fundamentals);
-        if (!inserted) count = 0;
-        else count = inserted;
+        if (!inserted) {
+            console.error(`No fue posible inicializar la DB con ${fundamentals.length} simbolos.`);
+            count = 0;
+        } else count = inserted;
     }
 
     if (count > 0) return res.status(200).json({ message: `Se inicializó la DB con ${count} registros` });
