@@ -8,12 +8,12 @@ import styles from './SymbolFilter.module.css';
  */
 export function SymbolFilter({onChange}) {
   const [symbol, setSymbol] = useState('');
-
   return (
     <div className={styles.filterContainer}>
       <span>Filtrar por simbolo:</span>
       <input
         type='text'
+        name='symbol'
         onChange={(e) => setSymbol(e.target.value.toLocaleUpperCase())}
         value={symbol}
         onKeyDown={(e) => e.key === 'Enter' && onChange(symbol.toLocaleUpperCase())}
