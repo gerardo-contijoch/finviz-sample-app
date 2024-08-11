@@ -77,7 +77,7 @@ async function initializeDBHandler(req, res) {
 
     if (validateFinVizKey(API_KEY)) {
         // Usar esta url para testing
-        //`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65&f=ta_change_u20&auth=${API_KEY}`
+        //`${FINVIZ_URL}?v=152&c=0,1,6,7,24,32,33,34,65,2&f=sh_avgvol_o2000&auth=${API_KEY}`
 
         console.log('Inicializando db desde finviz...');
 
