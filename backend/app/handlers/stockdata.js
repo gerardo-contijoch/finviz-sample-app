@@ -31,6 +31,9 @@ async function getStocksDataHandler(req, res) {
     var symbolFilter = req.query.symbol ? req.query.symbol.toLocaleString() : undefined;
     var nameFilter = req.query.name ? req.query.name.toLocaleString() : undefined;
 
+    if (symbolFilter) symbolFilter = sanitizeSymbol(symbolFilter);
+    // TODO: habria que sanitizar el nombre, pero practicamente cualquier string es valido
+
     var data = await getStocksFundamentals(symbolFilter, nameFilter);
 
     return res.status(200).json(data);
@@ -158,4 +161,13 @@ async function parseLines(lines) {
  */
 function validateFinVizKey(key) {
     return key && key.length == 36 && key == key.replace(/[^a-zA-Z0-9-]/g, '');
+}
+
+/**
+ * Poor man sanitize
+ * @param {string} symbol
+ * @returns
+ */
+function sanitizeSymbol(symbol) {
+    return symbol.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
 }

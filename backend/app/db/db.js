@@ -83,11 +83,6 @@ export async function getAllStocksFundamentals() {
  * @returns
  */
 export async function getStocksFundamentals(symbolFilter, nameFilter) {
-    // TODO: pasar esto al handler
-    if (symbolFilter) symbolFilter = sanitizeSymbol(symbolFilter);
-
-    // TODO: habria que sanitizar el nombre, pero practicamente cualquier string es valido
-
     // Shortcut
     if ((!symbolFilter && !nameFilter) || (symbolFilter === '' && nameFilter === ''))
         return await getAllStocksFundamentals();
@@ -123,15 +118,6 @@ export async function clearStocksFundamentals() {
     } finally {
         await client.close();
     }
-}
-
-/**
- * Poor man sanitize
- * @param {string} symbol
- * @returns
- */
-function sanitizeSymbol(symbol) {
-    return symbol.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
 }
 
 /**
