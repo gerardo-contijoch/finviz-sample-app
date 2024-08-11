@@ -78,22 +78,29 @@ export async function getAllStocksFundamentals() {
 
 /**
  *
- * @param {string} symbolFilter
+ * @param {string|undefined} symbolFilter
+ * @param {string|undefined} nameFilter
  * @returns
  */
-export async function getStocksFundamentals(symbolFilter) {
-    symbolFilter = sanitizeSymbol(symbolFilter);
+export async function getStocksFundamentals(symbolFilter, nameFilter) {
+    // TODO: pasar esto al handler
+    if (symbolFilter) symbolFilter = sanitizeSymbol(symbolFilter);
 
-    if (symbolFilter === '') return await getAllStocksFundamentals();
+    // TODO: habria que sanitizar el nombre, pero practicamente cualquier string es valido
+
+    // Shortcut
+    if ((!symbolFilter && !nameFilter) || (symbolFilter === '' && nameFilter === ''))
+        return await getAllStocksFundamentals();
 
     await client.connect();
 
     try {
+        const filter = armarFiltro(symbolFilter, nameFilter);
+        //console.log('filter:', filter);
+
         const database = client.db('stockData');
         const fundamentals = database.collection('fundamentals');
-
-        // Esta busqueda por regex no es optima, no usa indices
-        const cursor = fundamentals.find({ symbol: { $regex: `^${symbolFilter}` } });
+        const cursor = fundamentals.find(filter);
 
         let data = [];
         for await (const doc of cursor) {
@@ -125,4 +132,24 @@ export async function clearStocksFundamentals() {
  */
 function sanitizeSymbol(symbol) {
     return symbol.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+}
+
+/**
+ * Arma el filtro a aplicar en la busqueda de datos.
+ * @param {string|undefined} symbolFilter
+ * @param {string|undefined} nameFilter
+ * @returns
+ */
+function armarFiltro(symbolFilter, nameFilter) {
+    // Esta busqueda por regex no es optima, no usa indices
+    const symbolFilterCondition = symbolFilter ? { symbol: { $regex: `^${symbolFilter}` } } : undefined;
+    const nameFilterCondition = nameFilter ? { name: { $regex: `${nameFilter}`, $options: 'i' } } : undefined;
+
+    if (symbolFilterCondition && nameFilterCondition) {
+        return {
+            $and: [symbolFilterCondition, nameFilterCondition],
+        };
+    } else {
+        return symbolFilterCondition ?? nameFilterCondition;
+    }
 }

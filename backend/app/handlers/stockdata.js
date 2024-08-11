@@ -28,8 +28,10 @@ export function mapEndpointHandlers(app) {
  * @returns
  */
 async function getStocksDataHandler(req, res) {
-    var symbolFilter = req.query.symbol ?? '';
-    var data = await getStocksFundamentals(symbolFilter.toString());
+    var symbolFilter = req.query.symbol ? req.query.symbol.toLocaleString() : undefined;
+    var nameFilter = req.query.name ? req.query.name.toLocaleString() : undefined;
+
+    var data = await getStocksFundamentals(symbolFilter, nameFilter);
 
     return res.status(200).json(data);
 }
