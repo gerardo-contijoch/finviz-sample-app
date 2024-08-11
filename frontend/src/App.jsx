@@ -39,6 +39,21 @@ function App() {
     setData(d);
   }
 
+  async function clearDb() {
+    const host = import.meta.env.VITE_API_HOST || 'localhost';
+    const port = import.meta.env.VITE_API_PORT || 8090;
+    let url = `http://${host}:${port}/api/data/clear`;
+
+    console.log('Vaciando db...');
+    await fetch(url, {
+      method: 'POST',
+    }).then((res) => {
+      if (res.status == 200) {
+        setData([]);
+      }
+    });
+  }
+
   // Carga de datos inicial
   useEffect(() => {
     fetchData().then(() => {
@@ -78,7 +93,7 @@ function App() {
           {!dbIsEmpty && (
             <>
               <SymbolFilter onChange={setSymbol} />
-              <SearchResults data={data} />
+              <SearchResults data={data} onClearDb={async () => await clearDb()} />
             </>
           )}
         </>

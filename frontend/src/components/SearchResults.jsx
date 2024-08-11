@@ -1,10 +1,11 @@
 import {StockCard} from './StockCard';
+import styles from './InicializarDb.module.css';
 
 /**
  *
- * @param {{data: []}} param0
+ * @param {{data: [], onClearDb: () => void}} param0
  */
-export default function SearchResults({data}) {
+export default function SearchResults({data, onClearDb}) {
   return (
     <>
       {data.length > 50 && (
@@ -23,6 +24,9 @@ export default function SearchResults({data}) {
           <StockCard key={d.symbol} data={d} />
         ))}
       </div>
+      <button name='button_clear_db' className={styles.button} onClick={() => onClearDb()}>
+        Vaciar DB
+      </button>
     </>
   );
 }

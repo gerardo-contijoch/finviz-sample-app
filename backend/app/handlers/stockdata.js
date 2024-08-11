@@ -18,6 +18,7 @@ export function mapEndpointHandlers(app) {
     app.get('/api/data', getStocksDataHandler);
     app.post('/api/data/new', addStockDataHandler);
     app.post('/api/data/initialize', initializeDBHandler);
+    app.post('/api/data/clear', clearDBHandler);
 }
 
 /**
@@ -107,6 +108,17 @@ async function initializeDBHandler(req, res) {
 
     if (count > 0) return res.status(200).json({ message: `Se inicializó la DB con ${count} registros` });
     else return res.status(500).json({ message: 'No fue posible inicializar la DB.' });
+}
+
+/**
+ *
+ * @param {e.Request} req
+ * @param {e.Response} res
+ * @returns
+ */
+async function clearDBHandler(req, res) {
+    await clearStocksFundamentals();
+    return res.status(200).json({ message: `Se limpió la DB correctamente.` });
 }
 
 /**
