@@ -11,9 +11,9 @@ Las tecnologías usadas durante el desarrollo fueron:
 - Node
 
 > [!NOTE]
-> Esta es una aplicación de ejemplo con el fin de practicar el uso de las herramientas con las que la misma esta hecha.
+> Esta es una aplicación de ejemplo con el fin de practicar/demostrar el uso de las herramientas con las que la misma esta hecha.
 >
-> Puede contener bugs, inconsistencias o errores de ejecución, los cuales pueden nunca ser arreglados.
+> No existe practicamente manejos de errores y puede contener bugs, inconsistencias o errores de ejecución, los cuales pueden nunca ser arreglados.
 >
 > **NO SE RECOMIENDA PARA USO EN PRODUCCIÓN.**
 
@@ -65,15 +65,6 @@ para ejecutar el backend. Navegando a [http://localhost:8090](http://localhost:8
 {"message": "OK"}
 ```
 
-#### Inicializacion de la DB
-
-Con el backend corriendo lo primero que debemos hacer es inicializar la DB con datos. Estos datos pueden venir desde [Finviz](https://finviz.com/) (datos reales en realtime) o cargarse datos de prueba.
-
-> [!WARNING]
-> Lo siguiente es un hack temporal. NUNCA actualizar datos desde un `GET`.
-
-Para inicializar la DB acceder a [http://localhost:8090/data/initialize](http://localhost:8090/data/initialize). Si tenemos el api key de FinViz configurado simplemente agregar `?use_finviz=1` a la url y la DB se inicializará con datos reales.
-
 ### Frontend
 
 Para levantar el frontend ejecutar:
@@ -85,3 +76,5 @@ npm run frontend
 Por defecto el frontend estará escuchando en [http://localhost:5173](http://localhost:5173).
 
 La app mostrará una lista de acciones con algunos datos fundamentals de ellas. Esta lista esta limitada a 50 acciones, por lo que si el filtro configurado es muy amplio, es posible que no veamos todas las acciones.
+
+Si es la primera vez que cargamos la aplicación, se nos ofrecerá la opcion de inicializar la DB con datos.

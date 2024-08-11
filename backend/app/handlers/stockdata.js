@@ -16,8 +16,8 @@ import e from 'express';
  */
 export function mapEndpointHandlers(app) {
     app.get('/api/data', getStocksDataHandler);
-    app.get('/api/data/new', addStockDataHandler);
-    app.get('/api/data/initialize', initializeDBHandler);
+    app.post('/api/data/new', addStockDataHandler);
+    app.post('/api/data/initialize', initializeDBHandler);
 }
 
 /**
