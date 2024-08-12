@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import './App.css';
 import {SymbolFilter} from './components/SymbolFilter';
 import {NameFilter} from './components/NameFilter';
@@ -35,7 +35,7 @@ function App() {
   //   shouldRefreshData
   // );
 
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     const host = import.meta.env.VITE_API_HOST || 'localhost';
     const port = import.meta.env.VITE_API_PORT || 8090;
     let url = `http://${host}:${port}/api/data`;
@@ -50,7 +50,7 @@ function App() {
 
     const d = await fetch(url).then((res) => res.json());
     setData(d);
-  }
+  }, [symbol, nombre]);
 
   async function clearDb() {
     const host = import.meta.env.VITE_API_HOST || 'localhost';
@@ -73,7 +73,7 @@ function App() {
       setShowLoading(false);
       setShouldRefreshData(false);
     });
-  }, []);
+  }, [fetchData]);
 
   useEffect(() => {
     // Al cargarse la pagina ya vamos a cargar los datos
@@ -81,14 +81,14 @@ function App() {
     if (!shouldRefreshData) return;
 
     fetchData();
-  }, [shouldRefreshData]);
+  }, [showLoading, shouldRefreshData, fetchData]);
 
   useEffect(() => {
     // Al cargarse la pagina ya vamos a cargar los datos
     if (showLoading) return;
 
     fetchData();
-  }, [symbol, nombre]);
+  }, [symbol, nombre, showLoading, fetchData]);
 
   return (
     <>
