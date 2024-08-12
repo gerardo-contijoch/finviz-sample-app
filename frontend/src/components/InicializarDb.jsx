@@ -1,4 +1,5 @@
 import styles from './InicializarDb.module.css';
+import PropTypes from 'prop-types';
 
 /**
  *
@@ -29,3 +30,7 @@ export function InicializarDb({onDbInitialized}) {
     </div>
   );
 }
+
+InicializarDb.propTypes = {
+  onDbInitialized: PropTypes.func,
+};

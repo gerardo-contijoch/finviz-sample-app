@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import styles from './SymbolFilter.module.css';
+import PropTypes from 'prop-types';
 
 /**
  * Input y label usado para filtrar acciones por simbolos.
@@ -24,3 +25,9 @@ export function SymbolFilter({labelText, onChange, onEnterKey}) {
     </div>
   );
 }
+
+SymbolFilter.propTypes = {
+  labelText: PropTypes.string,
+  onChange: PropTypes.func,
+  onEnterKey: PropTypes.func,
+};

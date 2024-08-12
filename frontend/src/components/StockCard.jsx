@@ -1,4 +1,5 @@
 import styles from './StockCard.module.css';
+import PropTypes from 'prop-types';
 
 /**
  * Formatea un numero como precio.
@@ -88,3 +89,7 @@ export function StockCard({data}) {
     </div>
   );
 }
+
+StockCard.propTypes = {
+  data: PropTypes.object,
+};

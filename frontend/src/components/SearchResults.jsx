@@ -1,5 +1,6 @@
 import {StockCard} from './StockCard';
 import styles from './InicializarDb.module.css';
+import PropTypes from 'prop-types';
 
 /**
  *
@@ -30,3 +31,8 @@ export default function SearchResults({data, onClearDb}) {
     </>
   );
 }
+
+SearchResults.propTypes = {
+  data: PropTypes.array,
+  onClearDb: PropTypes.func,
+};
