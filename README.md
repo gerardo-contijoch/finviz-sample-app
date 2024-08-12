@@ -1,5 +1,7 @@
 # FinViz Sample App
 
+![FinViz sample app](header.png)
+
 App de ejemplo que muestra información de acciones (tomada de [Finviz](https://finviz.com/)) y permite filtrarlas.
 
 Las tecnologías usadas durante el desarrollo fueron:
