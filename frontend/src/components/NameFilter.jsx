@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 /**
  * Input y label usado para filtrar acciones por nombre.
- * @param {{labelText: string, onChange: (name: string) => void}, onEnterKey: (name: string) => void} param0
+ * @param {{labelText: string, onChange: (name: string) => void, onEnterKey: (name: string) => void}} param0
  * @returns
  */
 export function NameFilter({labelText, onChange, onEnterKey}) {
