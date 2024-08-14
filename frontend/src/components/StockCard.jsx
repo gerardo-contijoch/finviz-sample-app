@@ -49,6 +49,8 @@ function formatNumber(number) {
  */
 export function StockCard({data}) {
   //console.log(data);
+  if (!data) return <></>;
+
   return (
     <div
       className={styles.card}
