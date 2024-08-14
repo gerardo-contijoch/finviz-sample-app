@@ -8,7 +8,11 @@ import PropTypes from 'prop-types';
  */
 export function InicializarDb({onDbInitialized}) {
   async function initializeDb() {
-    await fetch('http://localhost:8090/api/data/initialize', {
+    const host = import.meta.env.VITE_API_HOST || 'localhost';
+    const port = import.meta.env.VITE_API_PORT || 8090;
+    let url = `http://${host}:${port}/api/data/initialize`;
+
+    await fetch(url, {
       method: 'POST',
     }).then(async (res) => {
       //console.log('initialize result:', await res.json());
