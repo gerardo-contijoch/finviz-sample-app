@@ -14,7 +14,7 @@ export function InicializarDb({onDbInitialized}) {
 
     await fetch(url, {
       method: 'POST',
-    }).then(async (res) => {
+    }).then((res) => {
       //console.log('initialize result:', await res.json());
       if (res.status == 200) {
         onDbInitialized();
