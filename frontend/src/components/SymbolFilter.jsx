@@ -15,6 +15,7 @@ export function SymbolFilter({labelText, onChange, onEnterKey}) {
       <input
         type='text'
         name='symbol'
+        className={styles.symbol}
         onChange={(e) => {
           setSymbol(e.target.value);
           onChange(e.target.value);
