@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
  * @param {{data: [], onClearDb: () => void}} param0
  */
 export default function SearchResults({data, onClearDb}) {
+  if (!data) return <></>;
+
   return (
     <>
       {data.length > 50 && (
@@ -25,7 +27,13 @@ export default function SearchResults({data, onClearDb}) {
           <StockCard key={d.symbol} data={d} />
         ))}
       </div>
-      <button name='button_clear_db' className={styles.button} onClick={() => onClearDb()}>
+      <button
+        name='button_clear_db'
+        className={styles.button}
+        onClick={() => {
+          if (onClearDb) onClearDb();
+        }}
+      >
         Vaciar DB
       </button>
     </>
