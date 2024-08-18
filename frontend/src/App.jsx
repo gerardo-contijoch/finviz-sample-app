@@ -22,19 +22,6 @@ function App() {
   const dbIsEmpty =
     !shouldRefreshData && data.length == 0 && symbol.length == 0 && nombre.length == 0;
 
-  // console.log(
-  //   'App showLoading:',
-  //   showLoading,
-  //   'symbol:',
-  //   `'${symbol}'`,
-  //   'data.len:',
-  //   data.length,
-  //   'dbIsEmpty:',
-  //   dbIsEmpty,
-  //   'shouldRefreshData:',
-  //   shouldRefreshData
-  // );
-
   const fetchData = useCallback(async () => {
     const host = import.meta.env.VITE_API_HOST || 'localhost';
     const port = import.meta.env.VITE_API_PORT || 8090;
@@ -82,13 +69,6 @@ function App() {
 
     fetchData();
   }, [showLoading, shouldRefreshData, fetchData]);
-
-  useEffect(() => {
-    // Al cargarse la pagina ya vamos a cargar los datos
-    if (showLoading) return;
-
-    fetchData();
-  }, [symbol, nombre, showLoading, fetchData]);
 
   return (
     <>
