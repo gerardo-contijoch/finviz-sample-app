@@ -11,6 +11,7 @@ Las tecnologías usadas durante el desarrollo fueron:
 - MongoDB
 - Express
 - Node
+- Docker (opcional)
 
 > [!NOTE]
 > Esta es una aplicación de ejemplo con el fin de practicar/demostrar el uso de las herramientas con las que la misma esta hecha.
@@ -23,9 +24,38 @@ Las tecnologías usadas durante el desarrollo fueron:
 
 - Node
 - MongoDB
+- Docker (solo si deseamos ejecutar la version containerizada de la app)
 - Api key en [Finviz](https://finviz.com/) (requerido solo para obtener datos reales)
 
-## Instrucciones
+## Instrucciones (con docker)
+
+Luego de haber clonado el repositorio ejecutar desde el root
+
+```sh
+docker-compose up
+```
+
+Esto va a levantar un contenedor para la DB, otro para el backend y otro para el frontend (website).
+
+> [!NOTE]
+> El contenedor del backend NO tiene configurada un Api key de FinViz. Por lo que no podremos obtener datos reales de acciones. Si deseamos configurar una api key, esto se puede hacer en la sección `environment` de `backend` en `docker-compose.yml`:
+>
+> ```yaml
+> environment:
+>   FINVIZ_API_KEY: <YOUR_API_KEY>
+> ```
+>
+> Luego de esto, ejecutar
+>
+> ```sh
+> docker-compose up --build
+> ```
+>
+> para generar una nueva imagen del backend.
+
+Por defecto el frontend estará escuchando en [http://localhost:5173](http://localhost:5173).
+
+## Instrucciones (forma manual)
 
 Luego de haber clonado el repositorio ejecutar desde el root
 
@@ -77,6 +107,10 @@ npm run frontend
 
 Por defecto el frontend estará escuchando en [http://localhost:5173](http://localhost:5173).
 
-La app mostrará una lista de acciones con algunos datos fundamentals de ellas. Esta lista esta limitada a 50 acciones, por lo que si el filtro configurado es muy amplio, es posible que no veamos todas las acciones.
+## Uso
 
-Si es la primera vez que cargamos la aplicación, se nos ofrecerá la opcion de inicializar la DB con datos.
+La app muestra una lista de acciones con algunos datos fundamentals de ellas.
+Esta lista puede ser filtrada por simbolo y/o nombre de la companía.
+La lista esta limitada a 50 acciones, por lo que si el filtro configurado es muy amplio, es posible que no veamos todas las acciones.
+
+Si es la primera vez que cargamos la aplicación, se nos ofrecerá la opción de inicializar la DB con datos.
